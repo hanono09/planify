@@ -18,7 +18,7 @@ var planfavorito = {
   };
   
   let planfavorito = JSON.parse(fs.readFileSync("./data/favoritos.json", "utf-8"));
-  planfavorito.push(pedido);
+  planfavorito.push(plan);
   fs.writeFileSync("pedidos.json", JSON.stringify(pedidos));
 
   };
