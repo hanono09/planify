@@ -1,3 +1,5 @@
+
+
 const signupform = document.querySelector("#signupform")
 signupform.addEventListener('submit', (e)=>{
 e.preventDefault()
@@ -16,3 +18,6 @@ localStorage.setItem('users', JSON.stringify(users))
 alert('Registro Exitoso!')
 window.location.href = 'login.html'
 })  
+
+postData("signup", { msg: input.value }, 
+

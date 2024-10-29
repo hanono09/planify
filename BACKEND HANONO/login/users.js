@@ -12,4 +12,3 @@ var usuario = {
 
  let usuario = JSON.parse(fs.readFileSync("./data/usuarios.json", "utf-8"));
 
-  

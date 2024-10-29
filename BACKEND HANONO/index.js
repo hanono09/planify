@@ -14,12 +14,12 @@ for (let i = 0; i < planes.length; i++) {
 // Guardar pedido
 
 var planfavorito = {
-    planfav: planfav,
+    "planfav": planfav,
   };
   
   let planfavorito = JSON.parse(fs.readFileSync("./data/favoritos.json", "utf-8"));
   planfavorito.push(plan);
-  fs.writeFileSync("pedidos.json", JSON.stringify(pedidos));
+  fs.writeFileSync("../favorito/favoritos.json", JSON.stringify(planfavorito));
 
   };
   
