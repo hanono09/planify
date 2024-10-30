@@ -19,5 +19,7 @@ alert('Registro Exitoso!')
 window.location.href = 'login.html'
 })  
 
-postData("signup", { msg: input.value }, 
+postData("signup", {nombre: name,
+password: password,
+email: email});
 

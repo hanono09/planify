@@ -16,17 +16,8 @@ form.addEventListener('submit', (e) => {
     const password = document.querySelector('#password').value
     const ciudad = document.querySelector('#ciudad').value
 
-    // Obtener los usuarios almacenados en localStorage
-    const users = JSON.parse(localStorage.getItem('users')) || []
-
-    // Verificar si el usuario existe y la contraseña es correcta
-    const validUser = users.find(user => user.email === email && user.password === password)
-    if (!validUser) {
-        return alert('Usuario y/o contraseña incorrectos!')
-    }
-
-    // Almacenar el login exitoso en localStorage
-    localStorage.setItem('login_success', JSON.stringify(validUser))
-
+    postData("login", {
+        password: password,
+        email: email});
 })
 
