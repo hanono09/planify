@@ -13,7 +13,7 @@ for (let i = 0; i < planes.length; i++) {
 
 // Guardar pedido
 
-var planfavorito = {
+var planfav = {
     "planfav": planfav,
   };
   
