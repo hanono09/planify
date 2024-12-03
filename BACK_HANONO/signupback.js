@@ -1,77 +1,94 @@
 import fs from "fs";
+import { onEvent, startServer } from "soquetic";
 
-// Validar email
-//regex se usa para validar si un correo electrónico tiene un formato válido según los criterios establecidos.
+// Validaciones
 function validarEmail(email) {
-    const regex = /^[^\s@]+@[^\s@]+\.(gmail\.com|outlook\.com|yahoo\.com|hotmail\.com)$/i;
+    const regex = /^[^\s@]+@[^\s@]+\.(gmail\.com)$/i;
     return regex.test(email);
 }
 
-// Validar contraseña
 function validarPassword(password) {
     const regex = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/;
     return regex.test(password);
 }
 
+// Gestión de usuarios
 function obtenerUsuarios() {
     try {
         return JSON.parse(fs.readFileSync("./usuarios.json", "utf-8"));
     } catch {
-        return []; // Si el archivo no existe o está vacío
+        return []; 
     }
 }
 
 function guardarUsuarios(usuarios) {
     fs.writeFileSync("./usuarios.json", JSON.stringify(usuarios, null, 2));
 }
-// Guardar usuario
+
+// Eventos de registro y login
 onEvent("signup", (data) => {
     const { nombre, password, email } = data;
-//! en JavaScript se utiliza para negar una condición. Invierte el valor de verdad
+
     if (!validarEmail(email)) {
-        console.log("El correo no es válido. Asegúrate de usar un correo con un dominio válido.");
-        return;
+        return { 
+            success: false, 
+            message: "El correo no es válido. Usa un dominio gmail.com" 
+        };
     }
 
     if (!validarPassword(password)) {
-        console.log("La contraseña no cumple con los requisitos. Debe tener al menos 8 caracteres, una mayúscula, un número y un carácter especial.");
-        return;
+        return { 
+            success: false, 
+            message: "Contraseña inválida. Requiere 8+ caracteres, mayúscula, número y símbolo." 
+        };
     }
 
     const usuarios = obtenerUsuarios();
     const userExists = usuarios.some(usuario => usuario.email === email);
 
     if (userExists) {
-        console.log("El correo ya está registrado.");
-        return;
+        return { 
+            success: false, 
+            message: "El correo ya está registrado." 
+        };
     }
 
     const newUser = { nombre, password, email };
     usuarios.push(newUser);
     guardarUsuarios(usuarios);
 
-    console.log("Usuario registrado correctamente.");
+    return { 
+        success: true, 
+        message: "Usuario registrado correctamente." 
+    };
 });
 
-// Cambiar contraseña
-onEvent("cambiarPassword", (data) => {
-    const { email, nuevaPassword } = data;
+onEvent("login", (data) => {
+    const { email, password } = data;
 
-    if (!validarPassword(nuevaPassword)) {
-        console.log("La nueva contraseña no cumple con los requisitos.");
-        return;
+    if (!validarEmail(email)) {
+        return { 
+            success: false, 
+            message: "Email inválido" 
+        };
     }
 
     const usuarios = obtenerUsuarios();
-    const usuarioIndex = usuarios.findIndex(usuario => usuario.email === email);
+    const usuario = usuarios.find(u => u.email === email && u.password === password);
 
-    if (usuarioIndex === -1) {
-        console.log("Correo no encontrado.");
-        return;
+    if (usuario) {
+        return { 
+            success: true, 
+            message: "Inicio de sesión exitoso",
+            usuario: { nombre: usuario.nombre, email: usuario.email }
+        };
+    } else {
+        return { 
+            success: false, 
+            message: "Credenciales incorrectas" 
+        };
     }
-
-    usuarios[usuarioIndex].password = nuevaPassword;
-    guardarUsuarios(usuarios);
-
-    console.log("Contraseña actualizada correctamente.");
 });
+
+// Iniciar servidor
+startServer(3000, true);  
