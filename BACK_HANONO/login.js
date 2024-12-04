@@ -1,5 +1,5 @@
 // Conexión al servidor
-connect2Server();
+//connect2Server();
 
 // Elementos del DOM
 const loginForm = document.getElementById('loginForm');
@@ -9,12 +9,17 @@ const mensajeRespuesta = document.getElementById('mensajeRespuesta');
 
 // Validación de email
 function validarEmail(email) {
-    const regex = /^[^\s@]+@[^\s@]+\.(gmail\.com)$/i;
+    const regex = /@gmail\.com/;
+    //const regex = /^[^\s@]+@[^\s@]+\.(gmail\.com)$/i;
+    console.log("hola");
+    console.log(regex.test(email));
     return regex.test(email);
+    
 }
 
 // Validación de contraseña
 function validarPassword(password) {
+
     // Al menos 8 caracteres, una mayúscula, un número y un carácter especial
     const regex = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/;
     return regex.test(password);
@@ -22,6 +27,8 @@ function validarPassword(password) {
 
 // Validaciones locales antes de enviar
 function validarFormulario(email, password) {
+
+
     if (!email) {
         mostrarMensaje('Por favor, ingresa un correo electrónico', 'red');
         return false;
@@ -32,16 +39,29 @@ function validarFormulario(email, password) {
         return false;
     }
 
-    if (!password) {
-        mostrarMensaje('Por favor, ingresa una contraseña', 'red');
-        return false;
-    }
-
     if (!validarPassword(password)) {
         mostrarMensaje('La contraseña debe tener al menos 8 caracteres, una mayúscula, un número y un carácter especial', 'red');
         return false;
     }
 
+    // Validación de email con el backend
+    let emailValid = false;
+    postData("EMAIL", email, (response) => {
+        if (!response.ok) {
+            mostrarMensaje('Por favor, usa un correo de Gmail válido', 'red');
+            emailValid = false;
+        } else {
+            emailValid = true;
+        }
+    });
+
+
+    if (!password) {
+        mostrarMensaje('Por favor, ingresa una contraseña', 'red');
+        return false;
+    }
+
+   
     return true;
 }
 
@@ -52,7 +72,9 @@ function mostrarMensaje(mensaje, color = 'black') {
 }
 
 // Manejar envío del formulario
-loginForm.addEventListener('submit', (e) => {
+loginForm.addEventListener('click', (e) => {
+
+    console.log("hola")
     e.preventDefault();
     
     // Obtener valores

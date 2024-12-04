@@ -21,6 +21,7 @@ function obtenerUsuarios() {
     }
 }
 
+
 function guardarUsuarios(usuarios) {
     fs.writeFileSync("./usuarios.json", JSON.stringify(usuarios, null, 2));
 }
