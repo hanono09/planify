@@ -2,23 +2,44 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planes</title>
 </head>
 <body>
     <form id="loginForm">
         <input type="email" id="emailInput" placeholder="Email" required>
         <input type="password" id="passwordInput" placeholder="Contraseña" required>
         <button type="submit">Iniciar Sesión</button>
+        <button type="button" id="verPlanes">Ver planes recientemente consultados</button>
     </form>
-    <p id="mensajeRespuesta"></p>
+
+    <div id="resultado"></div>
 
     <!-- SocketIO -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.8.1/socket.io.js"></script>
-    
-    <!-- SoqueTIC -->
-    <script src="socket.js"></script>
+    <script>
+        // Conecta con el servidor de Socket.IO
+        const socket = io('http://localhost:3000');
 
-    <!-- Script de Login -->
-    <script src="login.js"></script>
+        // Selecciona el botón y añade el evento
+        document.getElementById('verPlanes').addEventListener('click', () => {
+            // Solicita los últimos planes al backend
+            socket.emit('obtenerUltimosPlanes');
+
+            // Escucha la respuesta del backend
+            socket.on('planesConsultados', (data) => {
+                const resultado = document.getElementById('resultado');
+                resultado.innerHTML = ''; // Limpia resultados previos
+
+                if (data.error) {
+                    resultado.innerHTML = `<p>Error: ${data.error}</p>`;
+                } else {
+                    data.planes.forEach(plan => {
+                        resultado.innerHTML += `<p>${JSON.stringify(plan)}</p>`;
+                    });
+                }
+            });
+        });
+    </script>
 </body>
 </html>

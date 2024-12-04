@@ -1,5 +1,4 @@
 // Conexión al servidor
-//connect2Server();
 
 // Elementos del DOM
 const loginForm = document.getElementById('loginForm');
@@ -11,8 +10,7 @@ const mensajeRespuesta = document.getElementById('mensajeRespuesta');
 function validarEmail(email) {
     const regex = /@gmail\.com/;
     //const regex = /^[^\s@]+@[^\s@]+\.(gmail\.com)$/i;
-    console.log("hola");
-    console.log(regex.test(email));
+    
     return regex.test(email);
     
 }
