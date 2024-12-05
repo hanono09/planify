@@ -1,1 +1,22 @@
-    
+{
+    "planes": [
+      {
+        "nombre": "Plan Básico",
+        "precio": 10,
+        "características": [
+          "Acceso limitado",
+          "1 usuario",
+          "Soporte por correo"
+        ]
+      },
+      {
+        "nombre": "Plan Premium",
+        "precio": 25,
+        "características": [
+          "Acceso ilimitado",
+          "5 usuarios",
+          "Soporte 24/7"
+        ]
+      }
+    ]
+  }

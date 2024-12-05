@@ -92,4 +92,4 @@ onEvent("login", (data) => {
 });
 
 // Iniciar servidor
-startServer(3000, true);  
+startServer();  
