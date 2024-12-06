@@ -64,32 +64,10 @@ onEvent("signup", (data) => {
     };
 });
 
-onEvent("login", (data) => {
-    const { email, password } = data;
-
-    if (!validarEmail(email)) {
-        return { 
-            success: false, 
-            message: "Email inválido" 
-        };
-    }
-
-    const usuarios = obtenerUsuarios();
-    const usuario = usuarios.find(u => u.email === email && u.password === password);
-
-    if (usuario) {
-        return { 
-            success: true, 
-            message: "Inicio de sesión exitoso",
-            usuario: { nombre: usuario.nombre, email: usuario.email }
-        };
-    } else {
-        return { 
-            success: false, 
-            message: "Credenciales incorrectas" 
-        };
-    }
-});
+function loginCallback(data) {
+    const data = fs.readfileSync("usuarios.json", "utf8")
+}
+onEvent("login", loginCallback)
 
 // Iniciar servidor
 startServer();  

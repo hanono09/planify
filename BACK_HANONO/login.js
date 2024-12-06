@@ -22,7 +22,7 @@ function validarPassword(password) {
     const regex = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/;
     return regex.test(password);
 }
-
+ 
 // Validaciones locales antes de enviar
 function validarFormulario(email, password) {
 
@@ -84,8 +84,7 @@ loginForm.addEventListener('click', (e) => {
         return;
     }
 
-    // Enviar datos al backend
-    postData('login', { email, password }, (response) => {
+    function loginCallback(response) {
         if (response.success) {
             // Login exitoso
             mostrarMensaje('Inicio de sesión exitoso', 'green');
@@ -100,8 +99,13 @@ loginForm.addEventListener('click', (e) => {
 
         // Limpiar campo de contraseña
         passwordInput.value = '';
-    });
+    }
+
+    // Enviar datos al backend
+    postData('login', { email, password }, loginCallback);
 });
+
+
 
 // Limpiar mensaje de error al empezar a escribir
 emailInput.addEventListener('input', () => mostrarMensaje(''));
