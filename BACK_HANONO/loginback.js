@@ -1,38 +1,22 @@
 import fs from "fs";
 import {startServer, onEvent} from "soquetic"
-let users = JSON.parse(fs.readFileSync("./usuarios.json", "utf-8"));
 
-// Guardar inf usuario
+    onEvent("login", (data) => {
 
-var usuario = {
-    nombre: "[]",
-    password: "[]",
-    email: "[]",
- };
-
-
- let login = (data) => {
-    var user = {
-        password: data.password,
-        email: data.email,
-     }
-   
-   let usuarios = JSON.parse(fs.readFileSync("./usuarios.json", "utf-8"));
-   let usuarioEncontrado = null;
-    for (let i = 0; i < usuarios.length; i++) {
-        if (usuarios[i].email === user.email) { 
-            usuarioEncontrado = usuarios[i];
-            break;
-         }
-      }
-  
-      // Verifica si se encontró el usuario y si la contraseña coincide
-      if (usuarioEncontrado && usuarioEncontrado.password === user.password) {
-          console.log("Inicio de sesión exitoso");
-      } else {
-          console.log("Usuario o contraseña incorrectos");
-      }
-  };
-
-  startServer()
-
+        const { usuario } = (data);
+        const usuarios = JSON.parse(fs.readFileSync("./usuarios.JSON", "utf-8"))
+        for (let i = 0; i < usuarios.length; i++) {
+            if (usuarios[i].dni == login) {
+                console.log("hey")
+                return {
+                    status: 200, 
+                    usuario: login[i].email
+                }
+            }
+        }
+        return {
+            status: 400,
+            msg: "No se encontro tu perfume"
+        }
+    })
+    startServer()

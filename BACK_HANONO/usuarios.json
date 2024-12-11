@@ -1,14 +1,18 @@
+[
+    {
+    "dni": "10294839",
+    "password": "doe",
+    "email": "@"
+},
 {
-    "Usuarios":{
-        "1":{
-            "username": "john",
-            "password": "doe",
-            "email": "@"
-        },
-        "2": {
-
-        }
-        
-
-    }
+    "dni": "71390887",
+    "password": "doe",
+    "email": "@"
+},
+{
+    "dni": "49728332",
+    "password": "doe",
+    "email": "@"
 }
+]   
+          
