@@ -1,14 +1,22 @@
+connect2Server()
+
 function buscarusuario() {
-    const login = document.getElementById("user").value
+    const email = document.getElementById("emailInput").value
+    const password = document.getElementById("passwordInput").value
+
     const data = {
-        perfumeInput 
+        email,
+        password 
     }
 
-    function parfumCallback(res) {
-        alert(res.precio)
+    console.log(data)
+
+    function userCallback(res) {
+        alert(res)
+        console.log(res)
     } 
 
-    postData("parfum", data, parfumCallback)
+    postData("login", data, usercallback)
     console.log("hola")
 }
 
