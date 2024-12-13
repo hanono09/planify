@@ -16,8 +16,7 @@ function buscarusuario() {
         console.log(res)
     } 
 
-    postData("login", data, usercallback)
+    postData("login", data, userCallback)
     console.log("hola")
 }
 
-connect2Server()

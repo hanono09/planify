@@ -3,7 +3,7 @@ import fs from "fs";
 import readlineSync from "readline-sync";
 
 // Cargar archivos
-let planfavorito = JSON.parse(fs.readFileSync("./data/favoritos.json", "utf-8"));
+let planfavorito = JSON.parse(fs.readFileSync("favoritos.json", "utf-8"));
 
 
 let PlanesElegidos = [];

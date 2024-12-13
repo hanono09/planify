@@ -3,10 +3,10 @@ import {startServer, onEvent} from "soquetic"
 
     onEvent("login", (data) => {
 
-        const { usuario } = (data);
+        const { email, password } = (data);
         const usuarios = JSON.parse(fs.readFileSync("./usuarios.JSON", "utf-8"))
         for (let i = 0; i < usuarios.length; i++) {
-            if (usuarios[i].dni == login) {
+            if (usuarios[i].email == email) {
                 console.log("hola")
                 return {
                     status: 200, 
