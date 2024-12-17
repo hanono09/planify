@@ -1,4 +1,4 @@
-connect2Server()
+//connect2Server()
 
 function buscarusuario() {
     const email = document.getElementById("emailInput").value
@@ -12,16 +12,12 @@ function buscarusuario() {
 
     console.log(data)
 
-    function userCallback(res) {
-        alert(res)
-        console.log(res)
+    function userCallback(validarEmail) {
+       
+        console.log(validarEmail)
     } 
+    
 
     postData("login", data, userCallback)
     console.log("hola")
 }
-
-function nuec(data){
-    console.log(data)
-}
-
