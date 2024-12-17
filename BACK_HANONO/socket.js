@@ -81,7 +81,7 @@ const postData = (type, data, callback = () => {}) => {
     socket.emit("POSTEvent", type, data, RESTCallbackDecorator(callback));
 };
 
-const connect2Server = (PORT = 3000) => {
+ const connect2Server = (PORT = 3000) => {
     socket.io.uri = `http://localhost:${PORT}`;
     socket.connect();
 };

@@ -6,11 +6,17 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Estos son tus ultimos 10 planes consultados</h1>
+    <script src="./password.js"></script>
     <div id="planes"></div>
+    <input type="text" id="user1" placeholder="usuario">
+    <input type="password" id="changepassword" placeholder="cambiarcontraseña" src="password.html">
+    <input type="password" placeholder="Contraseñavieja" id="oldpassword">
+    <button  onclick="cambiarpassword()" >Cambiar Contraseña</button>
 
       <!-- SocketIO -->
       <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.8.1/socket.io.js"></script>
+
+      
     
       <!-- SoqueTIC -->
       <script src="socket.js"></script>

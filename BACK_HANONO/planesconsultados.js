@@ -1,4 +1,5 @@
-const fs = require('fs');
+import fs from "fs"
+
 
 // Función para obtener los últimos 2 planes
  function obtenerUltimosPlanes() {
@@ -16,6 +17,9 @@ const fs = require('fs');
 
         // Mostrar los últimos 2 planes
         console.log('Últimos 2 planes consultados:', ultimos10Planes);
+
+        postData ("planes", data)
+
     });
 }
 
