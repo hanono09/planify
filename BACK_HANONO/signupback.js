@@ -28,7 +28,7 @@ function guardarUsuarios(usuarios) {
 
 // Eventos de registro y login
 onEvent("signup", (data) => {
-    console.log("holissss")
+    console.log("hole")
     const { nombre, password, email } = data;
 
     if (!validarEmail(email)) {
