@@ -5,7 +5,6 @@
     <title>Login</title>
 
         <!-- Script de Login -->
-        <script src="login.js"></script>
 
 </head>
 <body>
@@ -13,7 +12,7 @@
         <input type="email" id="emailInput" placeholder="Email" required>
         <input type="password" id="passwordInput" placeholder="Contraseña" required>
         <button  onclick="buscarusuario()" >Iniciar Sesión</button>
-        <button onclick="obtenerUltimosPlanes()">Ver planes recientemente consultados</button>  
+        <button onclick="planes()">Ver planes recientemente consultados</button>  
 <a href="planes.html">d</a>
 
       </form>
@@ -25,11 +24,13 @@
     <!-- SoqueTIC -->
     <script src="socket.js"></script>
 
+    <script type="module" src="login.js"></script>
 
-    <script src="password.js"></script>
+
+    <script type="module" src="password.js"></script>
 
     <!-- Script de PlANES -->
-    <script src="planesconsultados.js"></script>
+    <script type="module" src="planesconsultados.js"></script>
 
 </body>
 </html>
