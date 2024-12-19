@@ -1,48 +1,56 @@
-import {obtenerUltimosPlanes} from "./planesconsultados.js"
-
-connect2Server()
-
+// Función de login
 function buscarusuario() {
-    const email = document.getElementById("emailInput").value
-    const password = document.getElementById("passwordInput").value
+    connect2Server()
+    const email = document.getElementById("emailInput").value;
+    const password = document.getElementById("passwordInput").value;
 
     const data = {
         email,
-        password 
+        password
+    };
+    console.log(data);
+
+    if (validarEmail(email) === false) {
+        console.log("entro aca");
+        alert("Por favor, ingrese un mail valido");
     }
 
-    if(validarEmail(email) === false){
-        console.log("entro aca")
-        alert("Por favor, ingrese un  mail valido");
+    if (validarPassword(password) === false) {
+        alert("Por favor, ingrese una password valida");
     }
-    
-    if (validarPassword(password) === false){
-        alert("Por favor, ingrese una password valida")
-    }
-    
-    console.log(validarPassword(password))
 
-    postData("login", data, userCallback)
-    console.log("hola")
+    console.log(validarPassword(password));
+
+    postData("login", data, userCallback);
+    console.log("hola");
 }
 
+// Callback para el postData
 function userCallback() {
-       
-    console.log()
-} 
+    console.log();
+}
 
+// Validación de email
 function validarEmail(email) {
-    console.log(email)
+    console.log(email);
     const regex = /^[^\s@]+@gmail\.com$/i;
     console.log(regex.test(email));
     return regex.test(email);
 }
 
+// Validación de contraseña
 function validarPassword(password) {
     const regex = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])(?=.{8,})[A-Za-z\d!@#$%^&*]+$/;
     return regex.test(password);
 }
 
-function planes(){
-    obtenerUltimosPlanes();
+// Función para obtener los últimos planes
+function planes() {
+    connect2Server()
+    postData("flan", (data) => {
+        console.log("Últimos 2 planes recibidos desde el backend:", data);
+    });
 }
+
+
+
